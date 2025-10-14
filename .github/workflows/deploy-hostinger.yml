@@ -2,37 +2,52 @@ name: Build and Deploy to Hostinger
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-      
+        uses: actions/checkout@v4
+
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      
-      - name: Build blog JSON from markdown
-        run: node build-blog.js
-      
+          node-version: 20
+          cache: npm
+
+      - name: Inspect workspace
+        run: |
+          ls -la
+          test -f build-blog.js && echo "build-blog.js present" || echo "build-blog.js MISSING"
+          test -f package.json && echo "package.json present" || echo "package.json MISSING"
+          test -d _posts && echo "_posts present" || echo "_posts MISSING"
+
+      - name: Build blog data
+        run: |
+          if [ -f package.json ]; then
+            npm ci || true
+            npm run build || node build-blog.js
+          else
+            node build-blog.js
+          fi
+
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
+          local-dir: .
           server-dir: /public_html/
           exclude: |
             **/.git*
-            **/.git*/**
-            **/node_modules/**
             **/.github/**
+            node_modules/**
+            **/_posts/**
+            **/*.md
             **/README*.md
             **/.vscode/**
