@@ -1,0 +1,32 @@
+{
+  "name": "rpeinvestmentai-site",
+  "private": true,
+  "scripts": {
+    "build": "node build-blog.js"
+  }
+}
+
+{
+  "name": "rpe-solutions-blog",
+  "version": "1.0.0",
+  "description": "RPE Solutions AI Blog with Decap CMS",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build-blog.js",
+    "start": "npm run build && npx http-server . -p 3000",
+    "dev": "npm run build && npx http-server . -p 3000 -o"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": [
+    "blog",
+    "decap-cms",
+    "netlify",
+    "ai",
+    "automation"
+  ],
+  "author": "RPE Solutions AI",
+  "license": "MIT"
+}
