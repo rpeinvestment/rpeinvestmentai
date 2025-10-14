@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "slug": "2025-01-15-how-ai-chatbots-transform-customer-service",
+      "title": "How AI Chatbots Are Transforming Customer Service",
+      "excerpt": "Discover how AI-powered chatbots are revolutionizing customer interactions and driving 24/7 engagement for modern businesses.",
+      "category": "AI Chatbots",
+      "date": "Jan 15, 2025",
+      "readTime": "5 min read",
+      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1600&auto=format&fit=crop",
+      "author": "RPE Solutions Team",
+      "description": "Learn how AI chatbots are transforming customer service with 24/7 availability, instant responses, and personalized interactions that drive business growth.",
+      "tags": ["AI", "Chatbots", "Customer Service", "Automation", "Business Growth"],
+      "featured": true,
+      "link": "post.html?slug=2025-01-15-how-ai-chatbots-transform-customer-service"
+    },
+    {
+      "id": 2,
+      "slug": "2025-01-12-automation-workflows-small-business",
+      "title": "5 Automation Workflows Every Small Business Needs",
+      "excerpt": "Learn the essential automation workflows that can save you 10+ hours per week and streamline your operations.",
+      "category": "Automation",
+      "date": "Jan 12, 2025",
+      "readTime": "7 min read",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop",
+      "author": "RPE Solutions Team",
+      "description": "Discover 5 powerful automation workflows that every small business should implement to save time, reduce errors, and focus on growth.",
+      "tags": ["Automation", "Small Business", "Productivity", "Workflows", "Efficiency"],
+      "featured": false,
+      "link": "post.html?slug=2025-01-12-automation-workflows-small-business"
+    }
+  ],
+  "categories": ["AI Chatbots", "Automation"],
+  "totalPosts": 2,
+  "lastUpdated": "2025-01-15T10:00:00.000Z"
+}

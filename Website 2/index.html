@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPE Solutions AI - Automating Success. Simplifying Growth.</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== PURPLE-TEAL HYBRID TECH THEME ==================== */
+        :root {
+            /* Backgrounds */
+            --bg-base: #F5F2FF;      /* light lavender */
+            --bg-subtle: #EEF4FF;    /* pale blue */
+            --bg-tint: #EAE5FF;      /* soft violet band */
+            --bg-dark: #0B1220;      /* contrast stripe (navy) */
+            
+            /* Text */
+            --text-strong: #0F172A;
+            --text-base: #111827;
+            --text-muted: #6B7280;
+            --text-on-dark: #E6EDF7;
+            
+            /* Accents */
+            --accent-purple: #6366F1; /* indigo */
+            --accent-teal: #00C9C8;   /* aqua/teal */
+            --accent-blue: #3B82F6;   /* electric blue (minor) */
+            --accent-gold: #FFC861;   /* warmth */
+            
+            /* Lines */
+            --line: #E5E7EB;
+            --line-dark: #1B2438;
+            
+            /* Radii & Shadows */
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --shadow-card: 0 8px 30px rgba(15, 23, 42, .08);
+            --shadow-hover: 0 12px 44px rgba(15, 23, 42, .14);
+            --glow-purple: 0 0 28px rgba(99,102,241,.22);
+            --glow-teal: 0 0 28px rgba(0,201,200,.22);
+            --glow-gold: 0 0 26px rgba(255,200,97,.20);
+        }
+        
+        /* ==================== GLOBAL STYLES ==================== */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-base);
+            color: var(--text-base);
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--text-strong);
+        }
+        
+        /* Custom scrollbar - Teal (Bigger) */
+        ::-webkit-scrollbar {
+            width: 18px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-teal);
+            border-radius: 9px;
+            border: 3px solid var(--bg-base);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00b3b2;
+            border: 2px solid var(--bg-base);
+        }
+        
+        * {
+            scrollbar-width: auto;
+            scrollbar-color: var(--accent-teal) var(--bg-base);
+        }
+        
+        /* Custom cursor - Sparkles Logo */
+        body {
+            cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgM3YxOE0zIDEyaDE4TTUuNiA1LjZsMTIuOCAxMi44TTE4LjQgNS42TDUuNiAxOC40IiBzdHJva2U9IiMwMEM5QzgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+'), auto;
+        }
+        
+        a, button {
+            cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgM3YxOE0zIDEyaDE4TTUuNiA1LjZsMTIuOCAxMi44TTE4LjQgNS42TDUuNiAxOC40IiBzdHJva2U9IiM2MzY2RjEiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+'), pointer;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Make images responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Prevent phantom space from absolutely positioned gradients */
+        section {
+            position: relative;
+        }
+        
+        /* ==================== LAYOUT UTILITIES ==================== */
+        .section {
+            padding: 32px 16px;
+        }
+        
+        .section + .section {
+            padding-top: 28px;
+        }
+        
+        .hero.section {
+            padding-top: 28px;
+            padding-bottom: 36px;
+        }
+        
+        /* Kill margin-collapses that create big gaps */
+        .section > *:first-child {
+            margin-top: 0 !important;
+        }
+        
+        .section > *:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding-inline: clamp(16px, 4vw, 32px);
+        }
+        
+        /* Cap spacer divs on mobile */
+        .spacer, .space, .divider, .section-gap {
+            height: clamp(8px, 2.5vh, 24px) !important;
+        }
+        
+        .light-gradient {
+            background:
+                radial-gradient(700px 400px at 22% 16%, rgba(99,102,241,.10), transparent 65%),
+                radial-gradient(800px 500px at 82% 12%, rgba(0,201,200,.10), transparent 65%),
+                linear-gradient(180deg, var(--bg-base) 0%, var(--bg-subtle) 100%);
+            color: var(--text-base);
+        }
+        
+        .tint-band {
+            background: linear-gradient(180deg, var(--bg-subtle) 0%, var(--bg-tint) 100%);
+        }
+        
+        .dark-stripe {
+            background: var(--bg-dark);
+            color: var(--text-on-dark);
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Animated gradient headline */
+        :root {
+            --grad-1: #6366F1;  /* indigo */
+            --grad-2: #00C9C8;  /* teal */
+            --grad-3: #3B82F6;  /* electric blue */
+        }
+        
+        .headline-gradient {
+            background: linear-gradient(90deg, var(--grad-1), var(--grad-2), var(--grad-3));
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: headlineShift 8s ease-in-out infinite;
+            text-shadow: 0 0 0 transparent;
+        }
+        
+        @keyframes headlineShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .headline-gradient {
+                animation: none;
+            }
+        }
+        
+        /* ==================== NAVIGATION (GLASS FLOATING) ==================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            background: rgba(10, 14, 24, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 6px 26px rgba(0, 0, 0, 0.28);
+            transition: background 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+        }
+        
+        header.scrolled {
+            background: rgba(10, 14, 24, 0.70);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.34);
+        }
+        
+        header a {
+            color: #E6EDF7 !important;
+        }
+        
+        header a:hover {
+            color: #A8F7F4 !important;
+        }
+        
+        .logo {
+            transition: transform 300ms ease;
+            margin-right: 40px;
+            flex-shrink: 0;
+        }
+        
+        header.scrolled .logo {
+            transform: scale(0.95);
+        }
+        
+        .logo-text {
+            color: #F8FAFC !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        
+        .desktop-nav {
+            flex-shrink: 1;
+            min-width: 0;
+        }
+        
+        .nav-link {
+            color: #E6EDF7 !important;
+            transition: color 200ms ease;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .nav-link:hover {
+            color: #00C9C8 !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00C9C8;
+            transition: width 220ms ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        header .btn,
+        header .btn-header,
+        header .cta {
+            background: linear-gradient(90deg, #00C9C8, #6366F1);
+            color: #fff;
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: 0 0 16px rgba(99, 102, 241, 0.28);
+            transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+            border: none;
+            cursor: pointer;
+            padding: 0.6rem 1.1rem;
+        }
+        
+        header .btn:hover,
+        header .btn-header:hover,
+        header .cta:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 
+                0 8px 24px rgba(0, 201, 200, 0.5),
+                0 0 35px rgba(0, 201, 200, 0.5),
+                0 0 50px rgba(99, 102, 241, 0.3);
+            filter: brightness(1.15);
+        }
+        
+        /* ==================== HERO (CINEMATIC PURPLE→TEAL) ==================== */
+        :root {
+            --hero-base-1: #F5F2FF;   /* light lavender */
+            --hero-base-2: #ECF3FF;   /* pale blue */
+            --glow-purple: rgba(99,102,241,.20);
+            --glow-teal: rgba(0,201,200,.20);
+        }
+        
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(650px 380px at 20% 28%, rgba(99,102,241,.18), transparent 70%),
+                radial-gradient(700px 420px at 85% 18%, rgba(0,201,200,.18), transparent 70%),
+                linear-gradient(180deg, var(--hero-base-1) 0%, var(--hero-base-2) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Animated glow layer */
+        .hero-glow {
+            position: absolute;
+            inset: -20% -10% -10% -10%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.55;
+            background:
+                radial-gradient(40% 35% at 20% 20%, var(--glow-purple), transparent 60%),
+                radial-gradient(36% 32% at 84% 18%, var(--glow-teal), transparent 60%),
+                radial-gradient(30% 30% at 50% 85%, rgba(99,102,241,.14), transparent 65%);
+            filter: blur(12px);
+            animation: heroFloat 24s ease-in-out infinite alternate;
+            max-height: 40vh;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-glow {
+                max-height: none;
+            }
+        }
+        
+        @keyframes heroFloat {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(1.25%, -1.25%, 0) scale(1.02); }
+            100% { transform: translate3d(-1.25%, 1.25%, 0) scale(1.01); }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .hero-glow {
+                animation: none;
+                opacity: 0.45;
+            }
+        }
+        
+        .rotating-text {
+            display: inline;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-cursor {
+            display: inline;
+            color: var(--accent-purple);
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* ==================== BUTTONS (PREMIUM POLISH) ==================== */
+        .btn, .button, a.button, button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.1rem;
+            min-height: 48px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, border-color 180ms ease, background 180ms ease;
+            will-change: transform, box-shadow, filter;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal));
+            color: white;
+            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.18);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow:
+                0 12px 32px rgba(99, 102, 241, 0.45),
+                0 0 40px rgba(0, 201, 200, 0.5),
+                0 0 60px rgba(99, 102, 241, 0.3);
+            filter: saturate(1.15) brightness(1.1);
+        }
+        
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: var(--text-strong);
+            backdrop-filter: blur(6px);
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+        }
+        
+        .btn-ghost:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                0 12px 28px rgba(15, 23, 42, 0.2),
+                0 0 30px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+        
+        /* ==================== INPUTS ==================== */
+        .input, input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: white;
+            color: var(--text-base);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: all 220ms ease;
+        }
+        
+        /* ==================== CARDS ==================== */
+        .card {
+            background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.60));
+            border: 1px solid rgba(255,255,255,.45);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+            backdrop-filter: blur(6px);
+            transition: transform 220ms ease, box-shadow 220ms ease;
+        }
+        
+        /* ==================== BADGE ==================== */
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(0, 201, 200, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--accent-purple);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            backdrop-filter: blur(4px);
+        }
+        
+        
+        /* ==================== PRICING CARDS (FROSTED) ==================== */
+        .price-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-card);
+            transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+            height: 100%;
+            padding: 40px;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 12px 36px rgba(15, 23, 42, 0.16),
+                0 0 22px rgba(99, 102, 241, 0.18);
+            border-color: rgba(99, 102, 241, 0.28);
+        }
+        
+        .price-card.popular {
+            outline: 2px solid rgba(0, 201, 200, 0.28);
+            box-shadow:
+                0 14px 40px rgba(15, 23, 42, 0.18),
+                0 0 28px rgba(0, 201, 200, 0.24);
+        }
+        
+        .badge-popular {
+            position: absolute;
+            top: -10px;
+            right: 12px;
+            background: linear-gradient(90deg, #7c5cff, #5cc8ff);
+            color: #0b1020;
+            font-weight: 800;
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            box-shadow: 0 6px 14px rgba(124, 92, 255, 0.35);
+        }
+        
+        .pricing .price {
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+        
+        .pricing-cta-wrap {
+            text-align: center;
+            margin-top: 32px;
+        }
+        
+        .cta-main {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding: 0.9rem 1.4rem;
+            gap: 10px;
+            background: linear-gradient(90deg, #5cc8ff, #7c5cff);
+            color: #0b1020;
+            border-radius: 999px;
+            box-shadow: 0 6px 20px rgba(124,92,255,0.35);
+            transition: all .3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .cta-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(124,92,255,0.5);
+        }
+        
+        /* SVG ICON STYLE - LIGHTNING BOLT */
+        .cta-icon {
+            display: inline-block;
+            vertical-align: middle;
+            transform: translateY(1px);
+            filter: drop-shadow(0 1px 0 rgba(11,16,32,.40)) drop-shadow(0 3px 8px rgba(11,16,32,.22));
+            transition: transform .25s ease, filter .25s ease;
+        }
+        
+        /* Guarantee strokes stay visible and crisp */
+        .cta-icon * {
+            fill: none !important;
+            vector-effect: non-scaling-stroke;
+        }
+        
+        .cta-main:hover .cta-icon {
+            transform: translateY(-2px) scale(1.05);
+            filter: drop-shadow(0 2px 0 rgba(11,16,32,.45)) drop-shadow(0 6px 12px rgba(124,92,255,.35));
+        }
+        
+        /* Optional: if this CTA appears on a dark section variant, flip the underlay to white */
+        .dark .cta-icon--dual path:first-of-type {
+            stroke: #ffffff;
+            opacity: 0.95;
+        }
+        
+        /* ==================== DARK STRIPE CARDS ==================== */
+        .value-card,
+        .testimonial {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--line-dark);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            padding: 32px;
+            transition: transform 220ms, box-shadow 220ms, border-color 220ms;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+            border-color: rgba(99, 102, 241, 0.35);
+        }
+        
+        .dark-stripe .icon {
+            color: var(--accent-purple);
+        }
+        
+        /* ==================== CONTACT FORM (GLASS) ==================== */
+        .form-glass {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+            padding: 32px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            background: white;
+            border: 1px solid var(--line);
+            color: var(--text-base);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            transition: all 220ms ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 4px rgba(0, 201, 200, 0.15);
+        }
+        
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        /* ==================== FOOTER (NAVY→INDIGO GRADIENT) ==================== */
+        .footer {
+            background: #0d1220;
+            color: #9fa8c3;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .footer a {
+            color: #e6ebff;
+            opacity: 0.95;
+        }
+        
+        .footer-link {
+            color: #e6ebff;
+            opacity: 0.95;
+            text-decoration: none;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 200ms, opacity 200ms;
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            border-color: rgba(230, 235, 255, 0.6);
+            opacity: 1;
+        }
+        
+        /* ==================== SCROLL REVEAL ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger helpers */
+        .reveal.delay-1 { transition-delay: 0.08s; }
+        .reveal.delay-2 { transition-delay: 0.16s; }
+        .reveal.delay-3 { transition-delay: 0.24s; }
+        
+        /* ==================== HERO PARALLAX ==================== */
+        .hero {
+            perspective: 1000px;
+        }
+        
+        .hero-parallax {
+            position: relative;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        
+        .hero-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+        
+        /* ==================== FOCUS RINGS (A11Y) ==================== */
+        a:focus-visible,
+        button:focus-visible,
+        .btn:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 201, 200, 0.25);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                transition: none !important;
+            }
+            .reveal.is-visible {
+                opacity: 1;
+                transform: none;
+            }
+            .btn,
+            .btn-primary,
+            .btn-ghost,
+            .card,
+            .price-card,
+            .hero-glow {
+                transition: none !important;
+                animation: none !important;
+            }
+            .hero-parallax,
+            .hero-layer {
+                transform: none !important;
+            }
+        }
+        
+        /* ==================== CHAT BUBBLE ==================== */
+        .chat-bubble {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-teal) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--glow-purple), var(--shadow-card);
+            transition: all 220ms ease;
+            z-index: 999;
+        }
+        
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* ==================== STARS ==================== */
+        .stars {
+            display: flex;
+            gap: 4px;
+            color: var(--accent-gold);
+        }
+        
+        /* ==================== SERVICES SECTION (DARK NAVY) ==================== */
+        .services-section.dark-navy {
+            position: relative;
+            background:
+                radial-gradient(900px 500px at 15% -10%, rgba(99,102,241,.18), transparent 70%),
+                radial-gradient(800px 480px at 90% -20%, rgba(0,201,200,.16), transparent 70%),
+                linear-gradient(180deg, #12182B 0%, #182035 100%);
+            color: var(--text-on-dark);
+            padding: clamp(72px, 9vw, 120px) 0;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        }
+        
+        .services-section .section-title {
+            color: var(--text-on-dark);
+        }
+        
+        .services-section .section-subtitle {
+            color: rgba(230, 237, 247, 0.7);
+        }
+        
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr;
+        }
+        
+        @media (min-width: 460px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Frosted glass service cards */
+        .services-section .card,
+        .services-section .service-card,
+        .card-glass {
+            position: relative;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+            padding: clamp(18px, 3.4vw, 24px);
+            transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
+            isolation: isolate;
+            height: 100%;
+        }
+        
+        .services-section .card:hover,
+        .services-section .service-card:hover,
+        .card-glass:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 14px 40px rgba(0, 0, 0, 0.50),
+                0 0 28px rgba(0, 201, 200, 0.22);
+            border-color: rgba(0, 201, 200, 0.35);
+        }
+        
+        /* Service card text styling */
+        .service-card h3 {
+            color: var(--text-on-dark);
+            margin: 8px 0 6px;
+        }
+        
+        .service-card p {
+            color: #B8C1D6;
+        }
+        
+        .service-card .learn {
+            display: inline-block;
+            margin-top: 10px;
+            color: #CFE9FF;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: opacity 180ms ease, color 180ms ease;
+        }
+        
+        .service-card:hover .learn {
+            color: #E9FBFF;
+            opacity: 1;
+        }
+        
+        /* ==================== SECTION SEPARATORS ==================== */
+        .separator {
+            position: relative;
+            height: 14px;
+            pointer-events: none;
+        }
+        
+        .separator::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(60% 120% at 50% 0%, rgba(99,102,241,.18), transparent 70%),
+                linear-gradient(180deg, rgba(0,0,0,0.08), transparent 70%);
+            opacity: 0.28;
+        }
+        
+        /* Section divider for dark→light transitions */
+        .section-divider {
+            height: 40px;
+            background: linear-gradient(180deg, rgba(14,19,32,1) 0%, rgba(14,19,32,.6) 40%, rgba(238,241,255,0) 100%);
+            pointer-events: none;
+        }
+        
+        /* ==================== ICON UTILITIES ==================== */
+        .icon-purple {
+            color: var(--accent-purple);
+        }
+        
+        .icon-teal {
+            color: var(--accent-teal);
+        }
+        
+        .icon-gold {
+            color: var(--accent-gold);
+        }
+        
+        /* === AI-STYLE ICON ENHANCEMENTS === */
+        :root {
+            --icon-cyan: #5cc8ff;
+            --icon-violet: #7c5cff;
+        }
+        
+        /* ICON CONTAINER (glass-tech style) */
+        .icon-wrap {
+            position: relative;
+            background: radial-gradient(circle at 30% 30%, rgba(92,200,255,0.25), rgba(124,92,255,0.1));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 8px rgba(124,92,255,0.25);
+            border-radius: 14px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            transition: all .35s ease;
+        }
+        
+        /* SVG ICON BASELINE */
+        .service-icon svg,
+        .feature-icon svg,
+        .pricing-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: url(#rpe-icon-gradient);
+            fill: none;
+            stroke-width: 2.5;
+            filter: drop-shadow(0 0 4px rgba(92,200,255,0.4));
+            transition: transform .3s ease, filter .3s ease;
+        }
+        
+        /* HOVER EFFECT (glow + scale) */
+        .icon-wrap:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 16px rgba(124,92,255,0.45);
+        }
+        
+        .icon-wrap:hover .service-icon svg,
+        .icon-wrap:hover .feature-icon svg,
+        .icon-wrap:hover .pricing-icon svg {
+            filter: drop-shadow(0 0 8px rgba(124,92,255,0.65));
+            transform: scale(1.12);
+        }
+        
+        /* Optional pulse animation for "live" AI feel */
+        @keyframes iconPulse {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(92,200,255,0.3)); }
+            50% { filter: drop-shadow(0 0 8px rgba(124,92,255,0.6)); }
+        }
+        
+        .service-icon.glow svg,
+        .feature-icon.glow svg {
+            animation: iconPulse 4s ease-in-out infinite;
+        }
+        
+        /* Subtle idle shimmer */
+        .icon-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            background: linear-gradient(120deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 80%);
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+        
+        .icon-wrap:hover::after {
+            opacity: 1;
+        }
+        
+        /* Mobile: disable hover animations for performance */
+        @media (max-width: 768px) {
+            .icon-wrap:hover {
+                transform: none;
+            }
+            .icon-wrap:hover svg {
+                transform: none;
+            }
+        }
+        
+        /* ==================== MOBILE EXCELLENCE ==================== */
+        
+        /* Tap targets */
+        button, a, .btn, input, textarea, select {
+            min-height: 44px;
+        }
+        
+        /* Sticky mobile CTA */
+        .sticky-cta {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding-inline: 16px;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            h2 {
+                font-size: 2rem !important;
+            }
+            
+            .section {
+                padding: 32px 16px;
+            }
+            
+            .hero.section {
+                padding-top: 28px;
+                padding-bottom: 36px;
+            }
+            
+            /* Full-width buttons on mobile */
+            .btn,
+            .btn-primary,
+            .btn-ghost {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 1.5rem;
+                font-size: 16px;
+                min-height: 52px;
+            }
+            
+            /* Hero buttons container */
+            .hero-cta-row {
+                flex-direction: column !important;
+            }
+            
+            .hero-cta-row .btn {
+                width: 100% !important;
+            }
+            
+            /* Service cards single column on small screens */
+            .services-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px;
+            }
+            
+            .service-card {
+                grid-column: span 12 !important;
+            }
+            
+            /* Pricing cards stack */
+            .price-card {
+                margin-bottom: 24px;
+            }
+            
+            /* Contact form improvements */
+            .form-glass {
+                padding: 24px;
+            }
+            
+            .form-input {
+                font-size: 16px;
+                padding: 12px 16px;
+                min-height: 48px;
+            }
+            
+            textarea.form-input {
+                min-height: 120px;
+            }
+            
+            /* Sticky CTA for mobile */
+            .sticky-cta {
+                display: flex;
+                position: fixed;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                z-index: 60;
+                background: linear-gradient(90deg, #5cc8ff, #7c5cff);
+                color: #0b1020;
+                border-radius: 999px;
+                padding: 0.9rem 1.2rem;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                font-weight: 800;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+                transition: transform 180ms ease, box-shadow 180ms ease;
+            }
+            
+            .sticky-cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            }
+            
+            .sticky-cta-icon {
+                display: inline-block;
+                vertical-align: middle;
+                transform: translateY(1px);
+                filter: drop-shadow(0 1px 0 rgba(11,16,32,.3)) drop-shadow(0 2px 6px rgba(11,16,32,.2));
+                transition: transform .3s ease, filter .3s ease;
+            }
+            
+            .sticky-cta-icon,
+            .sticky-cta-icon * {
+                fill: none !important;
+                vector-effect: non-scaling-stroke;
+            }
+            
+            .sticky-cta:hover .sticky-cta-icon {
+                transform: translateY(-2px) scale(1.05);
+                filter: drop-shadow(0 2px 0 rgba(11,16,32,.4)) drop-shadow(0 4px 10px rgba(11,16,32,.25));
+            }
+            
+            /* Hide sticky CTA when contact section is visible */
+            .sticky-cta.hidden {
+                display: none;
+            }
+            
+            /* Improved mobile spacing */
+            .badge {
+                font-size: 13px;
+                padding: 6px 16px;
+            }
+            
+            /* Mobile navigation improvements */
+            .mobile-menu-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Better touch targets for social icons */
+            .footer a[href="#"] {
+                min-width: 52px !important;
+                min-height: 52px !important;
+            }
+        }
+        
+        /* Small mobile devices (320px+) */
+        @media (max-width: 420px) {
+            h1 {
+                font-size: 2rem !important;
+            }
+            
+            h2 {
+                font-size: 1.75rem !important;
+            }
+            
+            .container {
+                padding-inline: 12px;
+            }
+            
+            .section {
+                padding: 28px 12px;
+            }
+        }
+        
+        /* Desktop spacing restoration */
+        @media (min-width: 769px) {
+            .section {
+                padding: clamp(48px, 6vw, 96px) 32px;
+            }
+            
+            .hero.section {
+                padding-top: clamp(48px, 6vw, 80px);
+                padding-bottom: clamp(56px, 7vw, 96px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // ==================== ICONS ====================
+        const Menu = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        );
+
+        const X = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        );
+
+        const ArrowRight = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        );
+
+        const Check = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        );
+
+        const Zap = () => (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+        );
+
+        const Bot = () => (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <circle cx="12" cy="5" r="2"></circle>
+                <path d="M12 7v4"></path>
+                <line x1="8" y1="16" x2="8" y2="16"></line>
+                <line x1="16" y1="16" x2="16" y2="16"></line>
+            </svg>
+        );
+
+        const Cog = () => (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6"></path>
+            </svg>
+        );
+
+        const Database = () => (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+        );
+
+        const Mail = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        );
+
+        const Phone = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+        );
+
+        const MessageCircle = () => (
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+        );
+
+        const LinkedIn = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+        );
+
+        const Instagram = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        );
+
+        const Youtube = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+        );
+
+        const Star = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        );
+
+        const Sparkles = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
+            </svg>
+        );
+
+        const Target = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+        );
+
+        const Heart = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+        );
+
+        // ==================== MAIN COMPONENT ====================
+        function RPESolutionsWebsite() {
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+            const [formSubmitted, setFormSubmitted] = useState(false);
+            const [showStickyCTA, setShowStickyCTA] = useState(true);
+            
+            // Rotating text
+            const rotatingTexts = ['AI Websites', 'AI Chatbots', 'Automation Pipelines'];
+            const [currentTextIndex, setCurrentTextIndex] = useState(0);
+            const [displayText, setDisplayText] = useState('');
+            const [isDeleting, setIsDeleting] = useState(false);
+
+            // Scroll handler for header and sticky CTA
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 20);
+                    
+                    // Hide sticky CTA when contact section is visible
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                        const rect = contactSection.getBoundingClientRect();
+                        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+                        setShowStickyCTA(!isVisible);
+                    }
+                };
+                handleScroll();
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            // Rotating text effect
+            useEffect(() => {
+                const currentText = rotatingTexts[currentTextIndex];
+                    const timeout = setTimeout(() => {
+                    if (!isDeleting) {
+                        if (displayText !== currentText) {
+                            setDisplayText(currentText.substring(0, displayText.length + 1));
+                } else {
+                            setTimeout(() => setIsDeleting(true), 2000);
+                        }
+                    } else {
+                        if (displayText === '') {
+                            setIsDeleting(false);
+                            setCurrentTextIndex((currentTextIndex + 1) % rotatingTexts.length);
+                        } else {
+                            setDisplayText(displayText.substring(0, displayText.length - 1));
+                        }
+                    }
+                }, isDeleting ? 50 : 100);
+                    return () => clearTimeout(timeout);
+            }, [displayText, isDeleting, currentTextIndex]);
+
+            // Scroll reveal observer (enhanced)
+            useEffect(() => {
+                const els = document.querySelectorAll('.reveal');
+                
+                // Fallback for no IntersectionObserver support
+                if (!('IntersectionObserver' in window) || !els.length) {
+                    els.forEach(el => el.classList.add('is-visible'));
+                    return;
+                }
+                
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.18 }
+                );
+
+                els.forEach(el => observer.observe(el));
+                return () => observer.disconnect();
+            }, []);
+            
+            // Hero parallax (mouse + scroll)
+            useEffect(() => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+                const wrapper = document.querySelector('.hero-parallax');
+                if (!wrapper) return;
+
+                const layers = Array.from(wrapper.querySelectorAll('.hero-layer'));
+                const getDepth = el => parseFloat(el.dataset.depth || '0.04');
+
+                let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0, ticking = false;
+
+                function onMouseMove(e) {
+                    const rect = wrapper.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    mouseX = (e.clientX - cx) / rect.width;
+                    mouseY = (e.clientY - cy) / rect.height;
+                    requestTick();
+                }
+
+                function onScroll() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    targetY = (scrollY % 300) / 300;
+                    requestTick();
+                }
+
+                function requestTick() {
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(update);
+                    }
+                }
+
+                function update() {
+                    ticking = false;
+                    targetX += (mouseX - targetX) * 0.08;
+
+                    layers.forEach(el => {
+                        const d = getDepth(el);
+                        const tx = (-targetX * 20) * d;
+                        const ty = (-targetY * 10) * d;
+                        el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+                    });
+                }
+
+                wrapper.addEventListener('mousemove', onMouseMove, { passive: true });
+                window.addEventListener('scroll', onScroll, { passive: true });
+
+                return () => {
+                    wrapper.removeEventListener('mousemove', onMouseMove);
+                    window.removeEventListener('scroll', onScroll);
+                };
+            }, []);
+
+            const handleFormChange = (e) => {
+                setFormData({ ...formData, [e.target.name]: e.target.value });
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setFormSubmitted(true);
+                setTimeout(() => setFormSubmitted(false), 3000);
+                setFormData({ name: '', email: '', message: '' });
+            };
+
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                element?.scrollIntoView({ behavior: 'smooth' });
+                setMobileMenuOpen(false);
+            };
+
+            return (
+                <div style={{ minHeight: '100vh' }}>
+                    {/* SVG Gradient Definition for Icons */}
+                    <svg width="0" height="0" style={{ position: 'absolute' }}>
+                        <defs>
+                            <linearGradient id="rpe-icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#5cc8ff"/>
+                                <stop offset="100%" stopColor="#7c5cff"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    {/* Navigation */}
+                    <header className={scrolled ? 'scrolled' : ''} style={{ padding: '20px 0' }}>
+                        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <div style={{ 
+                                    width: '48px', 
+                                    height: '48px', 
+                                    background: 'linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-teal) 100%)', 
+                                    borderRadius: '12px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'white',
+                                    boxShadow: 'var(--glow-purple)'
+                                }}>
+                                    <Sparkles />
+                                    </div>
+                                <span className="logo-text" style={{ 
+                                    fontSize: '24px', 
+                                    fontFamily: 'Poppins'
+                                }}>
+                                        RPE Solutions AI
+                                    </span>
+                                </div>
+
+                            <div style={{ display: 'none', gap: '40px', alignItems: 'center' }} className="desktop-nav">
+                                {['Home', 'Services', 'About'].map(item => (
+                                    <button 
+                                        key={item}
+                                        onClick={() => scrollToSection(item.toLowerCase())}
+                                        className="nav-link"
+                                        style={{ 
+                                            background: 'none', 
+                                            border: 'none', 
+                                            cursor: 'pointer',
+                                            fontSize: '16px',
+                                            fontWeight: '500',
+                                            padding: '8px 0'
+                                        }}
+                                    >
+                                        {item}
+                                    </button>
+                                ))}
+                                <a 
+                                    href="blog.html"
+                                    className="nav-link"
+                                    style={{ 
+                                        fontSize: '16px',
+                                        fontWeight: '500',
+                                        padding: '8px 0'
+                                    }}
+                                >
+                                    Blog
+                                </a>
+                                <button 
+                                    onClick={() => scrollToSection('contact')}
+                                    className="nav-link"
+                                    style={{ 
+                                        background: 'none', 
+                                        border: 'none', 
+                                        cursor: 'pointer',
+                                        fontSize: '16px',
+                                        fontWeight: '500',
+                                        padding: '8px 0'
+                                    }}
+                                >
+                                    Contact
+                                </button>
+                                <button 
+                                    onClick={() => scrollToSection('contact')} 
+                                    className="btn-header"
+                                >
+                                    Get Started
+                                </button>
+                            </div>
+
+                            <button 
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                style={{ 
+                                    display: 'block',
+                                    background: 'none', 
+                                    border: 'none', 
+                                    color: '#E6EDF7',
+                                    cursor: 'pointer'
+                                }}
+                                className="mobile-menu-btn"
+                            >
+                                    {mobileMenuOpen ? <X /> : <Menu />}
+                                </button>
+                        </div>
+
+                        {mobileMenuOpen && (
+                            <div style={{ 
+                                background: 'rgba(15, 20, 40, 0.95)', 
+                                borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                                padding: '24px',
+                                backdropFilter: 'blur(12px)'
+                            }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                    {['Home', 'Services', 'About'].map(item => (
+                                        <button 
+                                            key={item}
+                                            onClick={() => scrollToSection(item.toLowerCase())}
+                                            className="nav-link"
+                                            style={{ 
+                                                background: 'none', 
+                                                border: 'none',
+                                                cursor: 'pointer',
+                                                fontSize: '18px',
+                                                textAlign: 'left',
+                                                padding: '12px 0'
+                                            }}
+                                        >
+                                            {item}
+                                        </button>
+                                    ))}
+                                    <a 
+                                        href="blog.html"
+                                        className="nav-link"
+                                        style={{ 
+                                            fontSize: '18px',
+                                            textAlign: 'left',
+                                            padding: '12px 0'
+                                        }}
+                                    >
+                                        Blog
+                                    </a>
+                                    <button 
+                                        onClick={() => scrollToSection('contact')}
+                                        className="nav-link"
+                                        style={{ 
+                                            background: 'none', 
+                                            border: 'none',
+                                            cursor: 'pointer',
+                                            fontSize: '18px',
+                                            textAlign: 'left',
+                                            padding: '12px 0'
+                                        }}
+                                    >
+                                        Contact
+                                    </button>
+                                    <button 
+                                        onClick={() => scrollToSection('contact')}
+                                        className="btn-header"
+                                        style={{ marginTop: '8px' }}
+                                    >
+                                        Get Started
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </header>
+
+                    {/* Hero Section - Cinematic Purple→Teal */}
+                    <section id="home" className="hero section light-gradient is-animated">
+                        <div className="hero-parallax">
+                            <div className="hero-layer" data-depth="0.06" style={{
+                                background: 'radial-gradient(40% 35% at 20% 20%, rgba(99,102,241,.20), transparent 60%)',
+                                filter: 'blur(12px)'
+                            }}></div>
+                            <div className="hero-layer hero-glow" data-depth="0.03"></div>
+                        </div>
+                        <div className="container hero-content">
+                            <div style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}>
+                                <div className="badge reveal" style={{ marginBottom: '32px' }}>
+                                    AI-Powered Business Solutions
+                                </div>
+                                
+                                <h1 className="reveal" style={{ 
+                                    fontSize: 'clamp(3rem, 7vw, 5rem)', 
+                                    fontWeight: '700',
+                                    marginBottom: '24px',
+                                    lineHeight: '1.1'
+                                }}>
+                                    Automating <span className="headline-gradient">Success</span>.<br />
+                                    Simplifying <span className="headline-gradient">Growth</span>.
+                                </h1>
+                                
+                                <p className="reveal" style={{ 
+                                    fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', 
+                                    color: 'var(--text-muted)',
+                                    marginBottom: '32px',
+                                    lineHeight: '1.6'
+                                }}>
+                                    We build AI-powered websites, chatbots, and automations that save time, grow revenue, and scale your business effortlessly.
+                                </p>
+                                
+                                <div className="reveal" style={{ 
+                                    fontSize: 'clamp(1.5rem, 3vw, 2rem)', 
+                                    fontWeight: '600',
+                                    marginBottom: '48px',
+                                    minHeight: '60px',
+                                    color: 'var(--text-strong)'
+                                }}>
+                                    Build <span className="rotating-text">{displayText}</span><span className="text-cursor">|</span>
+                                </div>
+                                
+                                <div className="reveal hero-cta-row" style={{ 
+                                    display: 'flex', 
+                                    gap: '16px', 
+                                    justifyContent: 'center',
+                                    flexWrap: 'wrap',
+                                    width: '100%'
+                                }}>
+                                    <button 
+                                        onClick={() => scrollToSection('contact')}
+                                        className="btn btn-primary"
+                                        style={{ fontSize: '18px' }}
+                                    >
+                                        Get a Free Quote <ArrowRight />
+                                    </button>
+                                    <button 
+                                        onClick={() => scrollToSection('services')}
+                                        className="btn btn-ghost"
+                                        style={{ fontSize: '18px' }}
+                                    >
+                                        Explore Services
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="separator" aria-hidden="true"></div>
+
+                    {/* Services Section - Dark Navy Gradient */}
+                    <section id="services" className="section services-section dark-navy">
+                        <div className="container">
+                            <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+                                <h2 className="section-title reveal" style={{ 
+                                    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', 
+                                    fontWeight: '700',
+                                    marginBottom: '16px'
+                                }}>
+                                    Our Services
+                                </h2>
+                                <p className="section-subtitle reveal delay-1" style={{ 
+                                    fontSize: '20px'
+                                }}>
+                                    Comprehensive solutions to transform your business
+                                </p>
+                            </div>
+
+                            <div className="services-grid">
+                                {[
+                                    { 
+                                        icon: <Zap />, 
+                                        title: 'Smart Websites', 
+                                        description: 'Modern, fast, and optimized for conversions. Built with cutting-edge technology.'
+                                    },
+                                    { 
+                                        icon: <Bot />, 
+                                        title: 'AI Chatbots', 
+                                        description: 'Turn visitors into qualified leads automatically with intelligent conversation.'
+                                    },
+                                    { 
+                                        icon: <Cog />, 
+                                        title: 'Business Automations', 
+                                        description: 'Connect your tools and eliminate busy work. Focus on what matters.'
+                                    },
+                                    { 
+                                        icon: <Database />, 
+                                        title: 'CRM & Workflow Setup', 
+                                        description: 'Streamline operations with custom CRM solutions and workflow optimization.'
+                                    }
+                                ].map((service, index) => (
+                                    <article key={index} className="service-card card-glass reveal">
+                                        <div className="icon-wrap">
+                                            <div className="service-icon glow">
+                                                {service.icon}
+                                            </div>
+                                        </div>
+                                        <h3 style={{ 
+                                            fontSize: '24px', 
+                                            fontWeight: '700',
+                                            marginBottom: '16px'
+                                        }}>
+                                            {service.title}
+                                        </h3>
+                                        <p style={{ 
+                                            fontSize: '16px',
+                                            marginBottom: '24px',
+                                            lineHeight: '1.6'
+                                        }}>
+                                            {service.description}
+                                        </p>
+                                    </article>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="section-divider" aria-hidden="true"></div>
+
+                    {/* Pricing Section - Tint Band */}
+                    <section className="section tint-band pricing">
+                        <div className="container">
+                            <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
+                                <h2 style={{ 
+                                    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', 
+                                    fontWeight: '700',
+                                    marginBottom: '16px'
+                                }}>
+                                    Flexible Pricing Plans
+                                </h2>
+                                <p style={{ 
+                                    fontSize: '20px', 
+                                    color: 'var(--text-muted)'
+                                }}>
+                                    Choose the perfect plan for your business
+                                </p>
+                            </div>
+
+                            <div style={{ 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                gap: '32px',
+                                maxWidth: '1200px',
+                                margin: '0 auto'
+                            }}>
+                                {[
+                                    {
+                                        name: 'Starter',
+                                        price: '$500 - $1,000',
+                                        description: 'Perfect for small businesses getting started',
+                                        features: [
+                                            '1-3 page website',
+                                            'Basic design and layout',
+                                            'Mobile responsive',
+                                            'Contact form',
+                                            'Basic SEO setup'
+                                        ],
+                                        popular: false
+                                    },
+                                    {
+                                        name: 'Professional',
+                                        price: '$1,000 - $2,500',
+                                        description: 'For growing businesses ready to scale',
+                                        features: [
+                                            'Up to 10 pages',
+                                            'Custom design',
+                                            'Mobile responsive',
+                                            'Contact form and booking integration',
+                                            'Advanced SEO setup',
+                                            'Basic e-commerce functionality',
+                                            '1 month of maintenance'
+                                        ],
+                                        popular: true
+                                    },
+                                    {
+                                        name: 'Premium',
+                                        price: '$2,500+',
+                                        description: 'Tailored solutions for large organizations',
+                                        features: [
+                                            'Unlimited pages',
+                                            'Fully custom design and branding',
+                                            'Mobile responsive',
+                                            'Advanced integrations (e-commerce, CRM, etc.)',
+                                            'Full SEO optimization',
+                                            'Blog setup',
+                                            '3 months of maintenance and support'
+                                        ],
+                                        popular: false
+                                    }
+                                ].map((plan, index) => (
+                                    <div 
+                                        key={index} 
+                                        className={`price-card reveal delay-${index + 1} ${plan.popular ? 'popular' : ''}`}
+                                    >
+                                            {plan.popular && (
+                                            <div className="badge-popular">Most Popular</div>
+                                        )}
+                                        
+                                        <h3 style={{ 
+                                            fontSize: '28px', 
+                                            fontWeight: '700',
+                                            marginBottom: '16px',
+                                            marginTop: plan.popular ? '8px' : '0'
+                                        }}>
+                                            {plan.name}
+                                        </h3>
+                                        
+                                        <div className="accent-gradient" style={{ 
+                                            fontSize: '40px', 
+                                            fontWeight: '700',
+                                            marginBottom: '16px'
+                                        }}>
+                                            {plan.price}
+                                        </div>
+                                        
+                                        <p style={{ 
+                                            fontSize: '16px', 
+                                            color: 'var(--text-muted)',
+                                            marginBottom: '32px'
+                                        }}>
+                                            {plan.description}
+                                        </p>
+                                        
+                                        <ul style={{ 
+                                            listStyle: 'none', 
+                                            padding: 0,
+                                            marginBottom: '32px'
+                                        }}>
+                                                {plan.features.map((feature, i) => (
+                                                <li key={i} style={{ 
+                                                    display: 'flex', 
+                                                    alignItems: 'flex-start',
+                                                    gap: '12px',
+                                                    marginBottom: '16px',
+                                                    fontSize: '16px',
+                                                    color: 'var(--text-base)'
+                                                }}>
+                                                    <span className="icon-teal" style={{ marginTop: '2px' }}>
+                                                        <Check />
+                                                    </span>
+                                                    {feature}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        
+                                            <button 
+                                                onClick={() => scrollToSection('contact')} 
+                                            className={plan.popular ? 'btn btn-primary' : 'btn btn-ghost'}
+                                            style={{ width: '100%' }}
+                                            >
+                                                Get Started
+                                            </button>
+                                        </div>
+                                    ))}
+                            </div>
+                            
+                            {/* Pricing CTA */}
+                            <div className="pricing-cta-wrap section reveal">
+                                <button 
+                                    onClick={() => scrollToSection('contact')}
+                                    className="btn cta-main"
+                                    aria-label="Get Started Today"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="cta-icon cta-icon--dual" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                                        {/* DARK UNDERLAY for contrast */}
+                                        <path d="M13 2L3 14h7v8l10-12h-7z"
+                                              fill="none"
+                                              stroke="#0b1020"
+                                              strokeWidth="3.2"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              opacity="0.95"/>
+                                        {/* BRAND GRADIENT OVERLAY */}
+                                        <path d="M13 2L3 14h7v8l10-12h-7z"
+                                              fill="none"
+                                              stroke="url(#rpe-icon-gradient)"
+                                              strokeWidth="2.2"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"/>
+                                    </svg>
+                                    Get Started Today
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="separator" aria-hidden="true"></div>
+
+                    {/* About / Proof Section - DARK STRIPE */}
+                    <section id="about" className="section dark-stripe">
+                        <div className="container">
+                            <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
+                                <h2 style={{ 
+                                    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', 
+                                    fontWeight: '700',
+                                    marginBottom: '16px',
+                                    color: 'var(--text-on-dark)'
+                                }}>
+                                    Why Choose RPE Solutions?
+                                </h2>
+                                <p style={{ 
+                                    fontSize: '20px', 
+                                    color: 'rgba(230, 237, 247, 0.7)'
+                                }}>
+                                    We're not just building websites. We're building business engines.
+                                </p>
+                        </div>
+                        
+                            <div style={{ 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                gap: '32px'
+                            }}>
+                                {[
+                                    {
+                                        icon: <Sparkles />,
+                                        title: 'AI-Integrated',
+                                        description: 'Websites, chatbots, and automations that talk to each other seamlessly. Your entire digital ecosystem working in perfect harmony.'
+                                    },
+                                    {
+                                        icon: <Target />,
+                                        title: 'Strategy-First',
+                                        description: 'Every build is designed to increase efficiency and drive results. We focus on your bottom line, not just pretty designs.'
+                                    },
+                                    {
+                                        icon: <Heart />,
+                                        title: 'Personal Support',
+                                        description: 'Real people, real results. Get dedicated support from experts who care about your success as much as you do.'
+                                    }
+                                ].map((item, index) => (
+                                    <div key={index} className={`value-card reveal delay-${index + 1}`}>
+                                        <div className="icon-wrap">
+                                            <div className="feature-icon glow">
+                                                {item.icon}
+                                            </div>
+                                        </div>
+                                        <h3 style={{ 
+                                            fontSize: '24px', 
+                                            fontWeight: '700',
+                                            marginBottom: '16px',
+                                            color: 'var(--text-on-dark)'
+                                        }}>
+                                            {item.title}
+                                        </h3>
+                                        <p style={{ 
+                                            fontSize: '16px', 
+                                            color: 'rgba(230, 237, 247, 0.7)',
+                                            lineHeight: '1.6'
+                                        }}>
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="separator" aria-hidden="true"></div>
+
+                    {/* Contact Section - Light Gradient with Centered Layout */}
+                    <section id="contact" className="section light-gradient">
+                        <div className="container">
+                            <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
+                                <h2 style={{ 
+                                    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', 
+                                    fontWeight: '700',
+                                    marginBottom: '16px'
+                                }}>
+                                    Get In Touch
+                                </h2>
+                                <p style={{ 
+                                    fontSize: '20px', 
+                                    color: 'var(--text-muted)'
+                                }}>
+                                    Ready to transform your business? Let's talk.
+                                </p>
+                            </div>
+
+                            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+                                {/* Contact Form */}
+                                <div className="reveal delay-1 form-glass">
+                                    <h3 style={{ 
+                                        fontSize: '28px', 
+                                        fontWeight: '700',
+                                        marginBottom: '32px',
+                                        textAlign: 'center'
+                                    }}>
+                                        Send us a message
+                                    </h3>
+                                    
+                                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                                        <div>
+                                            <label style={{ 
+                                                display: 'block',
+                                                fontSize: '16px',
+                                                fontWeight: '600',
+                                                marginBottom: '8px',
+                                                color: 'var(--text-strong)'
+                                            }}>
+                                                Name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleFormChange}
+                                                required
+                                                className="form-input"
+                                                placeholder="John Doe"
+                                            />
+                                        </div>
+                                        
+                                        <div>
+                                            <label style={{ 
+                                                display: 'block',
+                                                fontSize: '16px',
+                                                fontWeight: '600',
+                                                marginBottom: '8px',
+                                                color: 'var(--text-strong)'
+                                            }}>
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleFormChange}
+                                                required
+                                                className="form-input"
+                                                placeholder="john@company.com"
+                                            />
+                                        </div>
+                                        
+                                        <div>
+                                            <label style={{ 
+                                                display: 'block',
+                                                fontSize: '16px',
+                                                fontWeight: '600',
+                                                marginBottom: '8px',
+                                                color: 'var(--text-strong)'
+                                            }}>
+                                                Message
+                                            </label>
+                                            <textarea
+                                                name="message"
+                                                value={formData.message}
+                                                onChange={handleFormChange}
+                                                required
+                                                rows={6}
+                                                className="form-input"
+                                                placeholder="Tell us about your project..."
+                                            />
+                                        </div>
+                                        
+                                        <button 
+                                            type="submit" 
+                                            className="btn btn-primary"
+                                            style={{ fontSize: '18px' }}
+                                        >
+                                            Send Message
+                                        </button>
+                                        
+                                        {formSubmitted && (
+                                            <div style={{ 
+                                                textAlign: 'center',
+                                                color: 'var(--accent-teal)',
+                                                fontSize: '16px',
+                                                fontWeight: '600'
+                                            }}>
+                                                ✓ Message sent! We'll get back to you soon.
+                                            </div>
+                                        )}
+                                    </form>
+                                </div>
+
+                                {/* Contact Info */}
+                                <div className="reveal delay-2" style={{ marginTop: '48px' }}>
+                                    <h3 style={{ 
+                                        fontSize: '28px', 
+                                        fontWeight: '700',
+                                        marginBottom: '32px',
+                                        textAlign: 'center'
+                                    }}>
+                                        Contact Information
+                                    </h3>
+                                    
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '500px', margin: '0 auto' }}>
+                                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                                            <div style={{ 
+                                                width: '48px',
+                                                height: '48px',
+                                                background: 'rgba(0, 201, 200, 0.1)',
+                                                border: '1px solid rgba(0, 201, 200, 0.3)',
+                                                borderRadius: '12px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'var(--accent-teal)',
+                                                flexShrink: 0
+                                            }}>
+                                                <Mail />
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: '600', marginBottom: '4px', color: 'var(--text-strong)' }}>Email</div>
+                                                <div style={{ color: 'var(--text-muted)' }}>contact@rpesolutions.ai</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                                            <div style={{ 
+                                                width: '48px',
+                                                height: '48px',
+                                                background: 'rgba(255, 200, 97, 0.1)',
+                                                border: '1px solid rgba(255, 200, 97, 0.3)',
+                                                borderRadius: '12px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'var(--accent-gold)',
+                                                flexShrink: 0
+                                            }}>
+                                                <Phone />
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: '600', marginBottom: '4px', color: 'var(--text-strong)' }}>Phone</div>
+                                                <div style={{ color: 'var(--text-muted)' }}>(609) 707-0180</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer - Navy→Indigo Gradient */}
+                    <footer className="footer" style={{ padding: '64px 0' }}>
+                        <div className="container">
+                            <div style={{ 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                                gap: '48px',
+                                marginBottom: '48px'
+                            }}>
+                                <div>
+                                    <div style={{ 
+                                        display: 'flex', 
+                                        alignItems: 'center', 
+                                        gap: '12px',
+                                        marginBottom: '16px'
+                                    }}>
+                                        <div style={{ 
+                                            width: '40px', 
+                                            height: '40px', 
+                                            background: 'linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-teal) 100%)', 
+                                            borderRadius: '10px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}>
+                                            <Sparkles />
+                                        </div>
+                                        <span style={{ 
+                                            fontSize: '20px', 
+                                            fontWeight: '700', 
+                                            fontFamily: 'Poppins',
+                                            color: 'var(--text-on-dark)'
+                                        }}>
+                                            RPE Solutions AI
+                                        </span>
+                                    </div>
+                                    <p style={{ 
+                                        fontSize: '16px',
+                                        color: 'rgba(230, 237, 247, 0.7)',
+                                        fontStyle: 'italic'
+                                    }}>
+                                        Automating Success, Simplifying Growth.
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <h4 style={{ 
+                                        fontSize: '18px', 
+                                        fontWeight: '700',
+                                        marginBottom: '16px',
+                                        color: 'var(--text-on-dark)'
+                                    }}>
+                                        Quick Links
+                                    </h4>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                        {['Home', 'Services', 'About'].map(item => (
+                                            <button
+                                                key={item}
+                                                onClick={() => scrollToSection(item.toLowerCase())}
+                                                className="footer-link"
+                                                style={{ 
+                                                    background: 'none',
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    textAlign: 'left',
+                                                    padding: 0,
+                                                    fontSize: '16px'
+                                                }}
+                                            >
+                                                {item}
+                                            </button>
+                                        ))}
+                                        <a
+                                            href="blog.html"
+                                            className="footer-link"
+                                            style={{ 
+                                                fontSize: '16px'
+                                            }}
+                                        >
+                                            Blog
+                                        </a>
+                                        <button
+                                            onClick={() => scrollToSection('contact')}
+                                            className="footer-link"
+                                            style={{ 
+                                                background: 'none',
+                                                border: 'none',
+                                                cursor: 'pointer',
+                                                textAlign: 'left',
+                                                padding: 0,
+                                                fontSize: '16px'
+                                            }}
+                                        >
+                                            Contact
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 style={{ 
+                                        fontSize: '18px', 
+                                        fontWeight: '700',
+                                        marginBottom: '16px',
+                                        color: 'var(--text-on-dark)'
+                                    }}>
+                                        Follow Us
+                                    </h4>
+                                    <div style={{ display: 'flex', gap: '16px' }}>
+                                        {[
+                                            { icon: <LinkedIn />, label: 'LinkedIn' },
+                                            { icon: <Instagram />, label: 'Instagram' },
+                                            { icon: <Youtube />, label: 'YouTube' }
+                                        ].map((social, index) => (
+                                            <a 
+                                                key={index}
+                                                href="#"
+                                                style={{ 
+                                                    width: '48px',
+                                                    height: '48px',
+                                                    background: 'rgba(255, 255, 255, 0.08)',
+                                                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                                                    borderRadius: '12px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    color: 'rgba(230, 237, 247, 0.7)',
+                                                    textDecoration: 'none',
+                                                    transition: 'all 220ms ease',
+                                                    backdropFilter: 'blur(4px)'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.borderColor = 'var(--accent-teal)';
+                                                    e.currentTarget.style.color = 'var(--accent-teal)';
+                                                    e.currentTarget.style.background = 'rgba(0, 201, 200, 0.1)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+                                                    e.currentTarget.style.color = 'rgba(230, 237, 247, 0.7)';
+                                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                                                }}
+                                            >
+                                                {social.icon}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style={{ 
+                                borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                                paddingTop: '32px',
+                                textAlign: 'center',
+                                color: 'rgba(230, 237, 247, 0.6)',
+                                fontSize: '14px'
+                            }}>
+                                © 2025 RPE Solutions AI. All rights reserved.
+                            </div>
+                        </div>
+                    </footer>
+
+                    {/* Chat Bubble */}
+                    <div className="chat-bubble" title="Ask RPE AI">
+                        <MessageCircle />
+                    </div>
+                    
+                    {/* Sticky Mobile CTA */}
+                    <button 
+                        className={`sticky-cta ${!showStickyCTA ? 'hidden' : ''}`}
+                        onClick={() => scrollToSection('contact')}
+                        aria-label="Get a Free Quote"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="sticky-cta-icon cta-icon--dual" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                            {/* Dark stroke for visibility on gradient background */}
+                            <path d="M13 2L3 14h7v8l10-12h-7z"
+                                  fill="none"
+                                  stroke="#0b1020"
+                                  strokeWidth="2.8"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  opacity="1"/>
+                        </svg>
+                        Get a Free Quote
+                    </button>
+                    
+                    <style>{`
+                        @media (min-width: 769px) {
+                            .desktop-nav {
+                                display: flex !important;
+                            }
+                            .mobile-menu-btn {
+                                display: none !important;
+                            }
+                        }
+                    `}</style>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<RPESolutionsWebsite />, document.getElementById('root'));
+    </script>
+</body>
+</html>

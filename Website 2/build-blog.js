@@ -1,0 +1,129 @@
+const fs = require('fs');
+const path = require('path');
+
+// Simple front-matter parser (replaces gray-matter dependency)
+function parseFrontMatter(content) {
+  const lines = content.split('\n');
+  if (lines[0] !== '---') return { data: {}, content };
+  
+  let endIndex = -1;
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i] === '---') {
+      endIndex = i;
+      break;
+    }
+  }
+  
+  if (endIndex === -1) return { data: {}, content };
+  
+  const frontMatter = lines.slice(1, endIndex).join('\n');
+  const bodyContent = lines.slice(endIndex + 1).join('\n');
+  
+  const data = {};
+  frontMatter.split('\n').forEach(line => {
+    const match = line.match(/^(\w+):\s*(.+)$/);
+    if (match) {
+      let value = match[2];
+      // Remove quotes
+      if ((value.startsWith('"') && value.endsWith('"')) || 
+          (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      // Handle arrays
+      if (value.startsWith('[') && value.endsWith(']')) {
+        value = value.slice(1, -1).split(',').map(item => item.trim().replace(/['"]/g, ''));
+      }
+      // Handle booleans
+      if (value === 'true') value = true;
+      if (value === 'false') value = false;
+      
+      data[match[1]] = value;
+    }
+  });
+  
+  return { data, content: bodyContent };
+}
+
+// Create directories if they don't exist
+const postsDir = path.join(__dirname, '_posts');
+const dataDir = path.join(__dirname, '_data');
+
+if (!fs.existsSync(postsDir)) {
+  fs.mkdirSync(postsDir, { recursive: true });
+}
+
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+
+function buildBlogData() {
+  const posts = [];
+  
+  // Check if _posts directory exists and has files
+  if (fs.existsSync(postsDir)) {
+    const files = fs.readdirSync(postsDir);
+    
+    files.forEach(filename => {
+      if (filename.endsWith('.md')) {
+        const filePath = path.join(postsDir, filename);
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        const { data, content } = parseFrontMatter(fileContents);
+        
+        // Generate slug from filename
+        const slug = filename.replace('.md', '');
+        
+        posts.push({
+          id: posts.length + 1,
+          slug: slug,
+          title: data.title || 'Untitled',
+          excerpt: data.excerpt || '',
+          category: data.category || 'Uncategorized',
+          date: data.date ? new Date(data.date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          }) : 'No date',
+          readTime: data.readTime || '5 min read',
+          image: data.image || 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop',
+          author: data.author || 'RPE Solutions Team',
+          description: data.description || data.excerpt || '',
+          tags: data.tags || [],
+          featured: data.featured || false,
+          content: content,
+          link: `post.html?slug=${slug}`
+        });
+      }
+    });
+  }
+  
+  // Sort posts by date (newest first)
+  posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  // Write blog data JSON
+  const blogData = {
+    posts: posts,
+    categories: [...new Set(posts.map(post => post.category))],
+    totalPosts: posts.length,
+    lastUpdated: new Date().toISOString()
+  };
+  
+  fs.writeFileSync(
+    path.join(dataDir, 'blog.json'),
+    JSON.stringify(blogData, null, 2)
+  );
+  
+  console.log(`✅ Built ${posts.length} blog posts`);
+  
+  // Create individual post files for easier access
+  posts.forEach(post => {
+    fs.writeFileSync(
+      path.join(dataDir, `${post.slug}.json`),
+      JSON.stringify(post, null, 2)
+    );
+  });
+  
+  console.log('✅ Blog build complete!');
+}
+
+// Run the build
+buildBlogData();

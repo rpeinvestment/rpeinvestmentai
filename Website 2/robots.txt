@@ -1,0 +1,9 @@
+# robots.txt for RPE Solutions AI
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.rpesolutions.ai/sitemap.xml
+
+

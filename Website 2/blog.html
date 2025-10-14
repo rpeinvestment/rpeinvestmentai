@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - RPE Solutions AI | AI & Automation Insights</title>
+    <meta name="description" content="Insights, tips, and strategies for AI automation, chatbots, and business growth from RPE Solutions AI.">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== PURPLE-TEAL HYBRID TECH THEME ==================== */
+        :root {
+            /* Backgrounds */
+            --bg-base: #F5F2FF;
+            --bg-subtle: #EEF4FF;
+            --bg-tint: #EAE5FF;
+            --bg-dark: #0B1220;
+            
+            /* Text */
+            --text-strong: #0F172A;
+            --text-base: #111827;
+            --text-muted: #6B7280;
+            --text-on-dark: #E6EDF7;
+            
+            /* Accents */
+            --accent-purple: #6366F1;
+            --accent-teal: #00C9C8;
+            --accent-blue: #3B82F6;
+            --accent-gold: #FFC861;
+            
+            /* Icons */
+            --icon-cyan: #5cc8ff;
+            --icon-violet: #7c5cff;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-base);
+            color: var(--text-base);
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--text-strong);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Custom scrollbar - Teal */
+        ::-webkit-scrollbar {
+            width: 18px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-teal);
+            border-radius: 9px;
+            border: 3px solid var(--bg-base);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00b3b2;
+            border: 2px solid var(--bg-base);
+        }
+        
+        * {
+            scrollbar-width: auto;
+            scrollbar-color: var(--accent-teal) var(--bg-base);
+        }
+        
+        /* Custom cursor - Sparkles Logo */
+        body {
+            cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgM3YxOE0zIDEyaDE4TTUuNiA1LjZsMTIuOCAxMi44TTE4LjQgNS42TDUuNiAxOC40IiBzdHJva2U9IiMwMEM5QzgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+'), auto;
+        }
+        
+        a, button {
+            cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgM3YxOE0zIDEyaDE4TTUuNiA1LjZsMTIuOCAxMi44TTE4LjQgNS42TDUuNiAxOC40IiBzdHJva2U9IiM2MzY2RjEiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+'), pointer;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-inline: clamp(16px, 4vw, 32px);
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            background: rgba(10, 14, 24, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 6px 26px rgba(0, 0, 0, 0.28);
+            transition: all 250ms ease;
+        }
+        
+        header a {
+            color: #E6EDF7 !important;
+            text-decoration: none;
+        }
+        
+        header a:hover {
+            color: #A8F7F4 !important;
+        }
+        
+        .logo-text {
+            color: #F8FAFC !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.1rem;
+            min-height: 48px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal));
+            color: white;
+            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.18);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.35);
+        }
+        
+        /* Blog Hero */
+        .blog-hero {
+            background:
+                radial-gradient(650px 380px at 20% 28%, rgba(99,102,241,.18), transparent 70%),
+                radial-gradient(700px 420px at 85% 18%, rgba(0,201,200,.18), transparent 70%),
+                linear-gradient(180deg, #F5F2FF 0%, #ECF3FF 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            max-width: 600px;
+            margin: 32px auto 0;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 16px 24px 16px 56px;
+            border-radius: 999px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: white;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
+            transition: all 220ms ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 4px rgba(0, 201, 200, 0.15);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        /* Category Pills */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 48px 0;
+        }
+        
+        .category-pill {
+            padding: 10px 24px;
+            border-radius: 999px;
+            background: white;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--text-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 220ms ease;
+        }
+        
+        .category-pill:hover,
+        .category-pill.active {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal));
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+            padding: 60px 0;
+        }
+        
+        /* Blog Card */
+        .blog-card {
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, .08);
+            transition: all 220ms ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.16);
+            border-color: rgba(99, 102, 241, 0.28);
+        }
+        
+        .blog-card h3 {
+            color: var(--text-strong);
+        }
+        
+        .blog-card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(0, 201, 200, 0.1));
+        }
+        
+        .blog-card-content {
+            padding: 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(0, 201, 200, 0.1));
+            color: var(--accent-purple);
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .blog-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .blog-excerpt {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-purple);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 220ms ease;
+        }
+        
+        .blog-card:hover .read-more {
+            gap: 12px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0d1220;
+            color: #9fa8c3;
+            padding: 64px 0 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .footer a {
+            color: #e6ebff;
+            opacity: 0.95;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            opacity: 1;
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Loading spinner */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .blog-hero {
+                padding: 60px 0 40px;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Icons
+        const Search = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        );
+
+        const ArrowRight = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        );
+
+        const Sparkles = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
+            </svg>
+        );
+
+        // Blog posts loaded from CMS
+        let blogData = { posts: [], categories: [] };
+        let blogPosts = [];
+        let categories = ["All"];
+
+        // Load blog data
+        async function loadBlogData() {
+            try {
+                const response = await fetch('_data/blog.json');
+                if (response.ok) {
+                    blogData = await response.json();
+                    blogPosts = blogData.posts || [];
+                    categories = ["All", ...blogData.categories] || ["All"];
+                    console.log(`Loaded ${blogPosts.length} blog posts`);
+                } else {
+                    throw new Error('Failed to load blog data');
+                }
+            } catch (error) {
+                console.warn('Using fallback blog data:', error);
+                // Fallback data
+                blogPosts = [
+                    {
+                        id: 1,
+                        title: "How AI Chatbots Are Transforming Customer Service",
+                        excerpt: "Discover how AI-powered chatbots are revolutionizing customer interactions and driving 24/7 engagement for modern businesses.",
+                        category: "AI Chatbots",
+                        date: "Jan 15, 2025",
+                        readTime: "5 min read",
+                        image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop",
+                        link: "post.html"
+                    }
+                ];
+                categories = ["All", "AI Chatbots"];
+            }
+        }
+
+        function BlogPage() {
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedCategory, setSelectedCategory] = useState('All');
+            const [filteredPosts, setFilteredPosts] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [allCategories, setAllCategories] = useState(['All']);
+
+            // Load blog data on component mount
+            useEffect(() => {
+                async function initializeBlog() {
+                    await loadBlogData();
+                    setAllCategories(categories);
+                    setLoading(false);
+                }
+                initializeBlog();
+            }, []);
+
+            useEffect(() => {
+                let filtered = blogPosts;
+
+                // Filter by category
+                if (selectedCategory !== 'All') {
+                    filtered = filtered.filter(post => post.category === selectedCategory);
+                }
+
+                // Filter by search term
+                if (searchTerm) {
+                    filtered = filtered.filter(post =>
+                        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+
+                setFilteredPosts(filtered);
+            }, [searchTerm, selectedCategory]);
+
+            // Scroll reveal
+            useEffect(() => {
+                const els = document.querySelectorAll('.reveal');
+                if (!('IntersectionObserver' in window) || !els.length) {
+                    els.forEach(el => el.classList.add('is-visible'));
+                    return;
+                }
+                
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.18 }
+                );
+
+                els.forEach(el => observer.observe(el));
+                return () => observer.disconnect();
+            }, [filteredPosts]);
+
+            return (
+                <div>
+                    {/* Header */}
+                    <header style={{ padding: '20px 0' }}>
+                        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <a href="index.html" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                <div style={{ 
+                                    width: '48px', 
+                                    height: '48px', 
+                                    background: 'linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-teal) 100%)', 
+                                    borderRadius: '12px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'white',
+                                    boxShadow: '0 0 28px rgba(99,102,241,.22)'
+                                }}>
+                                    <Sparkles />
+                                </div>
+                                <span className="logo-text" style={{ fontSize: '24px', fontFamily: 'Poppins' }}>
+                                    RPE Solutions AI
+                                </span>
+                            </a>
+
+                            <a href="index.html#contact" className="btn btn-primary">
+                                Get Started
+                            </a>
+                        </div>
+                    </header>
+
+                    {/* Hero Section */}
+                    <section className="blog-hero">
+                        <div className="container">
+                            <h1 style={{ fontSize: 'clamp(3rem, 7vw, 4rem)', fontWeight: '700', marginBottom: '16px' }}>
+                                AI & Automation <span style={{
+                                    background: 'linear-gradient(90deg, var(--accent-purple), var(--accent-teal))',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                    backgroundClip: 'text'
+                                }}>Insights</span>
+                            </h1>
+                            <p style={{ fontSize: '20px', color: 'var(--text-muted)', maxWidth: '700px', margin: '0 auto' }}>
+                                Expert tips, strategies, and real-world case studies to help you leverage AI for business growth.
+                            </p>
+
+                            {/* Search Bar */}
+                            <div className="search-bar">
+                                <div className="search-icon">
+                                    <Search />
+                                </div>
+                                <input 
+                                    type="text" 
+                                    className="search-input"
+                                    placeholder="Search articles..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Category Pills */}
+                    <section style={{ background: 'var(--bg-subtle)' }}>
+                        <div className="container">
+                            <div className="category-pills">
+                                {allCategories.map(category => (
+                                    <button
+                                        key={category}
+                                        className={`category-pill ${selectedCategory === category ? 'active' : ''}`}
+                                        onClick={() => setSelectedCategory(category)}
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Blog Grid */}
+                    <section style={{ background: 'var(--bg-subtle)' }}>
+                        <div className="container">
+                            {loading ? (
+                                <div style={{ textAlign: 'center', padding: '80px 20px' }}>
+                                    <div style={{ 
+                                        width: '50px', 
+                                        height: '50px', 
+                                        border: '4px solid #f3f3f3',
+                                        borderTop: '4px solid var(--accent-purple)',
+                                        borderRadius: '50%',
+                                        animation: 'spin 1s linear infinite',
+                                        margin: '0 auto 20px'
+                                    }}></div>
+                                    <h3 style={{ fontSize: '24px', marginBottom: '12px' }}>Loading articles...</h3>
+                                </div>
+                            ) : filteredPosts.length > 0 ? (
+                                <div className="blog-grid">
+                                    {filteredPosts.map((post, index) => (
+                                        <a href={post.link || "#"} key={post.id} className="blog-card reveal" style={{ transitionDelay: `${index * 0.08}s` }}>
+                                            <img src={post.image} alt={post.title} className="blog-card-image" />
+                                            <div className="blog-card-content">
+                                                <div className="blog-meta">
+                                                    <span className="blog-category">{post.category}</span>
+                                                    <span>{post.date}</span>
+                                                    <span>•</span>
+                                                    <span>{post.readTime}</span>
+                                                </div>
+                                                <h3>{post.title}</h3>
+                                                <p className="blog-excerpt">{post.excerpt}</p>
+                                                <div className="read-more">
+                                                    Read Article
+                                                    <ArrowRight />
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div style={{ textAlign: 'center', padding: '80px 20px' }}>
+                                    <h3 style={{ fontSize: '24px', marginBottom: '12px' }}>No articles found</h3>
+                                    <p style={{ color: 'var(--text-muted)' }}>Try adjusting your search or filters.</p>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="footer">
+                        <div className="container">
+                            <div style={{ textAlign: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center', marginBottom: '16px' }}>
+                                    <div style={{ 
+                                        width: '40px', 
+                                        height: '40px', 
+                                        background: 'linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-teal) 100%)', 
+                                        borderRadius: '10px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 'white'
+                                    }}>
+                                        <Sparkles />
+                                    </div>
+                                    <span style={{ fontSize: '20px', fontWeight: '700', fontFamily: 'Poppins', color: 'var(--text-on-dark)' }}>
+                                        RPE Solutions AI
+                                    </span>
+                                </div>
+                                <p style={{ fontSize: '16px', color: 'rgba(230, 237, 247, 0.7)', fontStyle: 'italic', marginBottom: '24px' }}>
+                                    Automating Success, Simplifying Growth.
+                                </p>
+                                <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', marginBottom: '32px' }}>
+                                    <a href="index.html">Home</a>
+                                    <a href="index.html#services">Services</a>
+                                    <a href="blog.html">Blog</a>
+                                    <a href="index.html#contact">Contact</a>
+                                </div>
+                                <div style={{ 
+                                    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                                    paddingTop: '24px',
+                                    color: 'rgba(230, 237, 247, 0.6)',
+                                    fontSize: '14px'
+                                }}>
+                                    © 2025 RPE Solutions AI. All rights reserved.
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<BlogPage />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+

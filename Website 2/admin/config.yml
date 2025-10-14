@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME # Update this with your GitHub repo
+  branch: main
+
+# Uncomment below to enable drafts (recommended for team workflows)
+# publish_mode: editorial_workflow
+
+media_folder: "images/uploads" # Media files will be stored in the repo under images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "posts" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog Posts" # Used in the UI
+    folder: "_posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Category", name: "category", widget: "select", options: ["AI Chatbots", "Automation", "Web Development", "Marketing", "Case Studies", "Business Growth"]}
+      - {label: "Featured Image", name: "image", widget: "image"}
+      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Short description for the blog card"}
+      - {label: "Author", name: "author", widget: "string", default: "RPE Solutions Team"}
+      - {label: "Read Time", name: "readTime", widget: "string", default: "5 min read"}
+      - {label: "SEO Description", name: "description", widget: "text", required: false, hint: "Meta description for search engines"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Featured Post", name: "featured", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Blog Settings"
+        name: "blog-settings"
+        file: "_data/blog-settings.yml"
+        fields:
+          - {label: "Blog Title", name: "title", widget: "string", default: "AI & Automation Insights"}
+          - {label: "Blog Subtitle", name: "subtitle", widget: "text", default: "Expert tips, strategies, and real-world case studies to help you leverage AI for business growth."}
+          - {label: "Posts per page", name: "postsPerPage", widget: "number", default: 6}
