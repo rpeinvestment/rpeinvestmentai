@@ -19,14 +19,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Inspect workspace
-        run: |
-          ls -la
-          test -f build-blog.js && echo "build-blog.js present" || echo "build-blog.js MISSING"
-          test -f package.json && echo "package.json present" || echo "package.json MISSING"
-          test -d _posts && echo "_posts present" || echo "_posts MISSING"
-
-      - name: Build blog data
+      - name: Build blog data (if build-blog.js exists)
         run: |
           if [ -f build-blog.js ]; then
             node build-blog.js
@@ -41,7 +34,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
-          local-dir: .
+          local-dir: ./
           server-dir: /public_html/
           exclude: |
             **/.git*
